@@ -7,18 +7,28 @@
 			<button>Refresh</button>
 			<router-link to="/register">Register as coach</router-link>
 		</div>
-		<ul v-if="hasCoaches" >
-			<li v-for="coach in filteredCoaches" :key="coach.id">
-				<h3>{{ coach.firstName }}</h3>
-				<p>{{ coach.description }}</p>
-			</li>
+		<ul v-if="hasCoaches">
+			<coach-item v-for="coach in filteredCoaches" 
+			:key="coach.id" 
+			:id="coach.id" 
+			:first-name="coach.firstName"
+			:lastName="coach.lastName"
+			:rate="coach.hourlyRate" 
+			:areas="coach.areas">
+			</coach-item>
+
 		</ul>
 		<p v-else>No coaches found</p>
 	</section>
 </template>
 <script>
+import CoachItem from '../../components/coaches/CoachItem.vue';
 
 export default {
+	components:
+	{
+		CoachItem,
+	},
 	computed: {
 		filteredCoaches() {
 			return this.$store.getters['coaches/coaches'];
@@ -29,3 +39,15 @@ export default {
 	},
 }
 </script>
+<style scoped>
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.controls {
+	display: flex;
+	justify-content: space-between;
+}
+</style>
