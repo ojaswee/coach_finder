@@ -7,15 +7,17 @@
 				{{ area }}</span>
 		</div>
 		<div class="actions">
-			<router-link :to="coachDetails">Details</router-link>
-			<router-link :to="coachContact">Contact</router-link>
+			<base-button mode="outline" link :to="coachDetails">Details</base-button>
+			<base-button link :to="coachContact">Contact</base-button>
 		</div>
 	</li>
 </template>
 
 <script>
+import BaseButton from '../ui/BaseButton.vue';
 export default {
-	props: ['id', 'firstName', 'lastName','rate', 'areas'],
+	components: { BaseButton },
+	props: ['id', 'firstName', 'lastName', 'rate', 'areas'],
 	computed: {
 		fullName() {
 			return this.firstName + ' ' + this.lastName;
