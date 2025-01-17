@@ -3,8 +3,9 @@
 		Search
 	</section>
 	<section>
+		<base-card>
 		<div class="controls">
-			<button>Refresh</button>
+			<base-button>Refresh</base-button>
 			<router-link to="/register">Register as coach</router-link>
 		</div>
 		<ul v-if="hasCoaches">
@@ -16,9 +17,9 @@
 			:rate="coach.hourlyRate" 
 			:areas="coach.areas">
 			</coach-item>
-
 		</ul>
-		<p v-else>No coaches found</p>
+		<h3 v-else>No coaches found</h3>
+	</base-card>
 	</section>
 </template>
 <script>
