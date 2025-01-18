@@ -1,6 +1,26 @@
 <template>
-	<div></div>
+  <span class="badge" :class="type">
+    {{ title }}
+  </span>
 </template>
+
+<script>
+export default
+  {
+    props: {
+      type: {
+        type: String,
+        required: false,
+      },
+      title: {
+        type: String,
+        required: true
+      },
+    }
+  };
+</script>
+
+
 
 <style scoped>
 .badge {

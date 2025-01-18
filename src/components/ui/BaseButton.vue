@@ -1,10 +1,11 @@
 <template>
-<button v-if="!link" :class="mode">
-	<slot></slot>
-</button>
-<router-link v-else :to="to">
+
+<router-link v-if="link" :to="to">
 	<slot></slot>
 </router-link>
+<button v-else :class="mode">
+	<slot></slot>
+</button>
 </template>
 
 <script>

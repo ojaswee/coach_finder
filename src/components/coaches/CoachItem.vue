@@ -3,20 +3,22 @@
 		<h3>{{ fullName }}</h3>
 		<h4>${{ rate }}/hr</h4>
 		<div>
-			<span v-for="area in areas" :key="area">
-				{{ area }}</span>
+			<base-badge v-for="area in areas"
+				:key="area"
+				:type="area"
+				:title="area"
+				:class="area">
+			</base-badge>
 		</div>
 		<div class="actions">
-			<base-button mode="outline" link :to="coachDetails">Details</base-button>
-			<base-button link :to="coachContact">Contact</base-button>
+			<base-button :link="true" mode="outline" :to="coachDetails">Details</base-button> 
+			<base-button :link="true" :to="coachContact">Contact</base-button> 
 		</div>
 	</li>
 </template>
 
 <script>
-import BaseButton from '../ui/BaseButton.vue';
 export default {
-	components: { BaseButton },
 	props: ['id', 'firstName', 'lastName', 'rate', 'areas'],
 	computed: {
 		fullName() {
