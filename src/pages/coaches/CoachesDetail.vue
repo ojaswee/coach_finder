@@ -26,7 +26,7 @@
 	<section>
 		<base-card>
 			<h2>Interested ? Contact now! </h2>
-			<base-button link :to="contactLink">{{ contact }}</base-button>
+			<base-button link :to="contactLink">{{ Contact }}</base-button>
 		</base-card>
 	</section>
 </template>
@@ -56,7 +56,7 @@ export default {
 			return this.selectedCoach.contact;
 		},
 		contactLink(){
-			return 'mailto:' + this.selectedCoach.contact;
+			return this.$route.path + '/' + this.id + '/contact';
 		}
 	},
 	created(){

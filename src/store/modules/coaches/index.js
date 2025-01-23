@@ -12,16 +12,17 @@ export default
 						id: 'c1',
 						firstName: 'Ojaswee',
 						lastName: 'Dhungana',
-						areas: ['frontend', 'backend', 'career'],
+						areas: ['Frontend', 'Backend', 'Devops'],
 						description:
-							"I'm Ojaswee and I've worked as a freelance web developer for years.",
+							"With 6 years in software development and a degree in Computer Science, I'll help you get your first job or grow in your current role.",
+
 						hourlyRate: 30
 					},
 					{
 						id: 'c2',
 						firstName: 'Julie',
 						lastName: 'Jones',
-						areas: ['frontend', 'career'],
+						areas: ['Frontend', 'Devops'],
 						description:
 							'I am Julie and as a senior developer in a big tech company, I can help you get your first job or progress in your current role.',
 						hourlyRate: 30

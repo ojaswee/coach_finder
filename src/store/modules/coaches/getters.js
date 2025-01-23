@@ -7,5 +7,12 @@ export default {
 	},
 	findCoachById: (state) => (id) => {
 		return state.coaches.find(coach => coach.id === id);
+	},
+	getCoachAreas(state) {
+		const areas = new Set();
+        state.coaches.forEach(coach => {
+            coach.areas.forEach(area => areas.add(area));
+        });
+        return Array.from(areas);
 	}
 };
