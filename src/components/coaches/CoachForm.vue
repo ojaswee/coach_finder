@@ -17,18 +17,19 @@
 			<input type="number" id="hourlyRate" v-model.number="hourlyRate">
 		</div>
 		<div class="form-control">
-			<label for="areas">Areas of Expertise</label>
-			<div v-for="area in areas" :key="area">
-				<input type="checkbox" :id="area" v-model="selectedAreas[area]">
-				<label :for="area">{{ area }}</label>
-			</div>
-		</div>
+        <label>Areas of expertise</label>
+        <div v-for="area in getAreas" :key="area">
+          <input type="checkbox" :id="area" :value="area" v-model="selectedAreas" />
+          <label :for="area">{{ area }}</label>
+        </div>
+      </div>
 		<base-button type="submit">Register
 		</base-button>
 	</form>
 </template>
 <script>
 export default {
+	emits: ['save-data'],
 	data() {
 		return {
 			firstName: '',
@@ -39,7 +40,7 @@ export default {
 		};
 	},
 	computed: {
-		areas() {
+		getAreas() {
 			return this.$store.getters['coaches/getCoachAreas'];
 		}
 	},
@@ -50,9 +51,9 @@ export default {
 				lastName: this.lastName,
 				description: this.description,
 				rate: this.hourlyRate,
-				areas: this.selectedAreas
+				areas: [...this.selectedAreas]
 			};
-			console.log(formData);
+			this.$emit('save-data', formData);
 		}
 	}
 }

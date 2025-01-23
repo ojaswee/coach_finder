@@ -57,8 +57,7 @@ export default {
         setFilters(updatedFilters) {
             this.activeFilters = updatedFilters;
         },
-        async fetchCoaches() {
-            await this.$store.dispatch('coaches/fetchCoaches');
+        fetchCoaches() {
             this.allCoaches = this.$store.getters['coaches/coaches'];
         }
     },
