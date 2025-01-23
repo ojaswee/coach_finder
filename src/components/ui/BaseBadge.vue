@@ -1,5 +1,5 @@
 <template>
-  <span class="badge" :class="type">
+  <span :class="badgeClass">
     {{ title }}
   </span>
 </template>
@@ -16,11 +16,14 @@ export default
         type: String,
         required: true
       },
+    },
+    computed: {
+      badgeClass() {
+        return this.type.toLowerCase();
+      }
     }
   };
 </script>
-
-
 
 <style scoped>
 .badge {
@@ -35,15 +38,27 @@ export default
 .frontend {
   background-color: #3d008d;
   color: white;
+  border-radius: 30px;
+  padding: 0.5rem 1.5rem;
+  display: inline-block;
+  margin-right: 0.5rem;
 }
 
 .backend {
   background-color: #71008d;
   color: white;
+  border-radius: 30px;
+  padding: 0.5rem 1.5rem;
+  display: inline-block;
+  margin-right: 0.5rem;
 }
 
-.career {
+.devops {
   background-color: #8d006e;
   color: white;
+  border-radius: 30px;
+  padding: 0.5rem 1.5rem;
+  display: inline-block;
+  margin-right: 0.5rem;
 }
 </style>
