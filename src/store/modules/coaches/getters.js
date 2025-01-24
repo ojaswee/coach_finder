@@ -14,5 +14,11 @@ export default {
             coach.areas.forEach(area => areas.add(area));
         });
         return Array.from(areas);
+	},
+	isCoach(_,getters,rootGetters) {
+		const coaches = getters.coaches;
+		const userId = rootGetters.userId;
+		return coaches.some(coach => coach.id === userId);
+
 	}
 };

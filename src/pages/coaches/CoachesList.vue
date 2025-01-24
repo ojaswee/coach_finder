@@ -8,15 +8,11 @@
         <base-card>
             <div class="controls">
                 <base-button mode="outline">Refresh</base-button>
-                <base-button link to="/register">Register as coach</base-button>
+                <base-button v-if="!isCoach" link to="/register">Register as coach</base-button>
             </div>
             <ul v-if="hasCoaches">
-                <coach-item v-for="coach in filteredCoaches" 
-                    :key="coach.id" 
-                    :id="coach.id" 
-                    :first-name="coach.firstName"
-                    :last-name="coach.lastName"
-                    :rate="coach.hourlyRate" 
+                <coach-item v-for="coach in filteredCoaches" :key="coach.id" :id="coach.id"
+                    :first-name="coach.firstName" :last-name="coach.lastName" :rate="coach.hourlyRate"
                     :areas="coach.areas">
                 </coach-item>
             </ul>
@@ -51,7 +47,10 @@ export default {
         },
         hasCoaches() {
             return this.filteredCoaches.length > 0;
-        }
+        },
+        isCoach() {
+            return this.$store.getters['coaches/isCoach'];
+        },
     },
     methods: {
         setFilters(updatedFilters) {
