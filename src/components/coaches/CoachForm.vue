@@ -1,29 +1,31 @@
 <template>
 	<form id="coach-form" @submit.prevent="submitForm">
-		<div class="form-control" :class="{invalid: !firstName.isValid}">
+		<div class="form-control" :class="{ invalid: !firstName.isValid }">
 			<label for="firstName">First Name</label>
 			<input type="text" id="firstName" v-model="firstName.value" @blur="clearValidity('firstName')">
 			<p v-if="!firstName.isValid">Please enter a first name</p>
 		</div>
-		<div class="form-control" :class="{invalid: !lastName.isValid}">
+		<div class="form-control" :class="{ invalid: !lastName.isValid }">
 			<label for="lastName">Last Name</label>
 			<input type="text" id="lastName" v-model="lastName.value" @blur="clearValidity('lastName')">
 			<p v-if="!lastName.isValid">Please enter a last name</p>
 		</div>
-		<div class="form-control" :class="{invalid: !description.isValid}">
+		<div class="form-control" :class="{ invalid: !description.isValid }">
 			<label for="description">Description</label>
-			<textarea id="description" rows="6" v-model="description.value" @blur="clearValidity('description')"></textarea>
+			<textarea id="description" rows="6" v-model="description.value"
+				@blur="clearValidity('description')"></textarea>
 			<p v-if="!description.isValid">Please enter a description</p>
 		</div>
-		<div class="form-control" :class="{invalid: !hourlyRate.isValid}">
+		<div class="form-control" :class="{ invalid: !hourlyRate.isValid }">
 			<label for="hourlyRate">Hourly Rate</label>
 			<input type="number" id="hourlyRate" v-model="hourlyRate.value" @blur="clearValidity('hourlyRate')">
 			<p v-if="!hourlyRate.isValid">Please enter hourly rate as digits</p>
 		</div>
-		<div class="form-control" :class="{invalid: !selectedAreas.isValid}">
+		<div class="form-control" :class="{ invalid: !selectedAreas.isValid }">
 			<label>Areas of expertise</label>
-			<div v-for="area in getAreas" :key="area" >
-				<input type="checkbox" :id="area" :value="area" v-model="selectedAreas.value"  @blur="clearValidity('selectedAreas')"/>
+			<div v-for="area in getAreas" :key="area">
+				<input type="checkbox" :id="area" :value="area" v-model="selectedAreas.value"
+					@blur="clearValidity('selectedAreas')" />
 				<label :for="area">{{ area }}</label>
 			</div>
 			<p v-if="!selectedAreas.isValid">Please select at least one area</p>
@@ -52,7 +54,7 @@ export default {
 		}
 	},
 	methods: {
-		clearValidity(input){
+		clearValidity(input) {
 			this[input].isValid = true;
 		},
 		validateForm() {
