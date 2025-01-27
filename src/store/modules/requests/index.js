@@ -1,27 +1,14 @@
-const state = {
-    requests: []
-};
-
-const getters = {
-    allRequests(state) {
-        return state.requests;
-    }
-};
-
-const mutations = {
-    addRequest(state, payload) {
-        state.requests.push(payload);
-    }
-};
-
-const actions = {
-    addRequest({ commit }, payload) {
-        commit('addRequest', payload);
-    }
-};
+import mutations from './mutations.js';
+import actions from './actions.js';
+import getters from './getters.js';
 
 export default {
-    state,
+    namespaced: true,
+    state() {
+        return {
+            requests: []
+        };
+    },
     getters,
     mutations,
     actions

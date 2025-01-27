@@ -14,11 +14,7 @@
 		<base-card>
 			<h2>Areas of expertise</h2>
 			<div>
-				<base-badge v-for="area in areas" 
-				:key="area" 
-				:type="area" 
-				:title="area" 
-				:class="area">
+				<base-badge v-for="area in areas" :key="area" :type="area" :title="area" :class="area">
 				</base-badge>
 			</div>
 		</base-card>
@@ -26,7 +22,10 @@
 	<section>
 		<base-card>
 			<h2>Interested ? Contact now! </h2>
-			<base-button link :to="contactLink">{{ Contact }}</base-button>
+			<base-button link :to="contactLink">Contact </base-button>
+			<router-view></router-view> 
+			<!-- <router-link :to="contactLink">Contact Coach</router-link>
+			<router-view></router-view> -->
 		</base-card>
 	</section>
 </template>
@@ -34,33 +33,34 @@
 <script>
 export default {
 	props: ['id'],
-	data(){
+	data() {
 		return {
 			selectedCoach: null
 		};
 	},
 	computed: {
-		fullname(){
+		fullname() {
 			return this.selectedCoach.firstName + ' ' + this.selectedCoach.lastName;
 		},
-		rate(){
+		rate() {
 			return this.selectedCoach.hourlyRate;
 		},
-		description(){
+		description() {
 			return this.selectedCoach.description;
 		},
-		areas(){
+		areas() {
 			return this.selectedCoach.areas;
 		},
-		contact(){
+		contact() {
 			return this.selectedCoach.contact;
 		},
-		contactLink(){
-			return this.$route.path + '/' + this.id + '/contact';
+		contactLink() {
+			return `/coaches/${this.id}/contact`;
 		}
 	},
-	created(){
+	created() {
 		this.selectedCoach = this.$store.getters['coaches/findCoachById'](this.id);
 	}
 }
+
 </script>
