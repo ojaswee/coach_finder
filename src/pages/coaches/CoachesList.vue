@@ -7,7 +7,7 @@
     <section>
         <base-card>
             <div class="controls">
-                <base-button mode="outline">Refresh</base-button>
+                <base-button mode="outline" @click="fetchCoaches">Refresh</base-button>
                 <base-button v-if="!isCoach" link to="/register">Register as coach</base-button>
             </div>
             <ul v-if="hasCoaches">
@@ -33,10 +33,12 @@ export default {
     data() {
         return {
             activeFilters: [],
-            allCoaches: []
         };
     },
     computed: {
+        allCoaches() {
+            return this.$store.getters['coaches/coaches'];
+        },
         filteredCoaches() {
             if (this.activeFilters.length === 0) {
                 return this.allCoaches;
@@ -46,7 +48,7 @@ export default {
             );
         },
         hasCoaches() {
-            return this.filteredCoaches.length > 0;
+            return this.$store.getters['coaches/hasCoaches'];
         },
         isCoach() {
             return this.$store.getters['coaches/isCoach'];
@@ -57,11 +59,13 @@ export default {
             this.activeFilters = updatedFilters;
         },
         fetchCoaches() {
-            this.allCoaches = this.$store.getters['coaches/coaches'];
+           this.$store.dispatch('coaches/loadCoaches');
         }
     },
     created() {
         this.fetchCoaches();
+       // console.log(this.allCoaches());
+       console.log(this.hasCoaches);
     }
 };
 </script>
