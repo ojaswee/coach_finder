@@ -3,7 +3,6 @@ import { createStore } from 'vuex';
 import coachesModules from './modules/coaches/index.js';
 import requestsModules from './modules/requests/index.js';
 
-// Create a new store instance.
 const store = createStore({
     modules: {
         coaches: coachesModules,
@@ -11,7 +10,7 @@ const store = createStore({
     },
     state() {
         return {
-            userId: 'c3'
+            userId: 'c4'
         }
     },
     getters: {

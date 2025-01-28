@@ -1,4 +1,7 @@
 <template>
+    <base-dialog :show="!!error" title="Error" @close="error = null">
+        <p>{{ error }}</p>
+    </base-dialog>
     <section>
         <base-card>
             <coach-filter @filter-coaches="setFilters"></coach-filter>
@@ -8,9 +11,10 @@
         <base-card>
             <div class="controls">
                 <base-button mode="outline" @click="fetchCoaches">Refresh</base-button>
-                <base-button v-if="!isCoach" link to="/register">Register as coach</base-button>
+                <base-button v-if="!isLoading && !isCoach" link to="/register">Register as coach</base-button>
             </div>
-            <ul v-if="hasCoaches">
+            <div v-if="isLoading"><base-spinner></base-spinner></div>
+            <ul v-else-if="hasCoaches">
                 <coach-item v-for="coach in filteredCoaches" :key="coach.id" :id="coach.id"
                     :first-name="coach.firstName" :last-name="coach.lastName" :rate="coach.hourlyRate"
                     :areas="coach.areas">
@@ -33,6 +37,8 @@ export default {
     data() {
         return {
             activeFilters: [],
+            isLoading: false,
+            error: null
         };
     },
     computed: {
@@ -48,7 +54,7 @@ export default {
             );
         },
         hasCoaches() {
-            return this.$store.getters['coaches/hasCoaches'];
+            return !this.isLoading && this.$store.getters['coaches/hasCoaches'];
         },
         isCoach() {
             return this.$store.getters['coaches/isCoach'];
@@ -58,14 +64,21 @@ export default {
         setFilters(updatedFilters) {
             this.activeFilters = updatedFilters;
         },
-        fetchCoaches() {
-           this.$store.dispatch('coaches/loadCoaches');
+        async fetchCoaches() {
+            this.isLoading = true;
+            try {
+                await this.$store.dispatch('coaches/loadCoaches');
+            } catch (error) {
+                this.error = error.message;
+            }
+            this.isLoading = false;
+        },
+        handleError() {
+            this.error = null;
         }
     },
     created() {
         this.fetchCoaches();
-       // console.log(this.allCoaches());
-       console.log(this.hasCoaches);
     }
 };
 </script>

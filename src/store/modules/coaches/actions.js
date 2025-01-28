@@ -1,9 +1,6 @@
 import axios from "axios";
 
 export default {
-    fetchFirebase() {
-        return 'https://vue-http-demo-4ba90-default-rtdb.firebaseio.com/coaches';
-    },
     async registerCoach(context, data) {
         const userId = context.rootGetters.userId;
         const coachData = {
@@ -15,25 +12,28 @@ export default {
             areas: data.areas
         };
 
-        const response = await axios.put('https://vue-http-demo-4ba90-default-rtdb.firebaseio.com/coaches/' + userId + '.json'
-            , coachData);
+        try {
+            const response = await axios.put('https://vue-http-demo-4ba90-default-rtdb.firebaseio.com/coaches/' + userId + '.json'
+                , coachData);
 
-        // const responseData = await response.json();
-        if (!response.ok) {
-            new Error('Failed to register coach');
-        }
-
+            if (response.status !== 200) {
+                throw new Error('Failed to register coach');
+            }
+            
         context.commit('registerCoach', {
             ...coachData,
             id: userId
         });
+        } catch (error) {
+            const errorMessage = new Error(error.response?.data?.message || 'Failed to register coach!');
+            console.error('Error registering coach:', errorMessage);
+            throw errorMessage;
+        }
+
     },
     async loadCoaches({ commit }) {
         try {
             const response = await axios.get('https://vue-http-demo-4ba90-default-rtdb.firebaseio.com/coaches.json');
-            // const firebaselink = this.fetchFirebase + '.json';
-            // console.log(firebaselink);
-            // const response =await axios.get(firebaselink);
             const coaches = response.data;
             const coachesArray = [];
             for (const key in coaches) {
@@ -49,7 +49,9 @@ export default {
             }
             commit('setCoaches', coachesArray);
         } catch (error) {
-            console.error('Error loading coaches:', error);
+            const errorMessage = new Error(error.response?.data?.message || 'Failed to fetch coach data!');
+            console.error('Error loading coaches:', errorMessage);
+            throw errorMessage;
         }
     },
 }
