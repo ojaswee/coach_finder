@@ -31,7 +31,10 @@ export default {
         }
 
     },
-    async loadCoaches({ commit }) {
+    async loadCoaches(context,payload) {
+        if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+            return;
+        }
         try {
             const response = await axios.get('https://vue-http-demo-4ba90-default-rtdb.firebaseio.com/coaches.json');
             const coaches = response.data;
@@ -47,7 +50,8 @@ export default {
                 };
                 coachesArray.push(coach);
             }
-            commit('setCoaches', coachesArray);
+            context.commit('setCoaches', coachesArray);
+            context.commit('setFetchTimestamp');
         } catch (error) {
             const errorMessage = new Error(error.response?.data?.message || 'Failed to fetch coach data!');
             console.error('Error loading coaches:', errorMessage);
