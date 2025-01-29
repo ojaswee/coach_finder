@@ -1,33 +1,35 @@
 <template>
-	<section>
-		<base-card>
-			<h2> {{ fullname }}</h2>
-			<h3>${{ rate }}/hr</h3>
-		</base-card>
-	</section>
-	<section>
-		<base-card>
-			<h3>{{ description }}</h3>
-		</base-card>
-	</section>
-	<section>
-		<base-card>
-			<h2>Areas of expertise</h2>
-			<div>
-				<base-badge v-for="area in areas" :key="area" :type="area" :title="area" :class="area">
-				</base-badge>
-			</div>
-		</base-card>
-	</section>
-	<section>
-		<base-card>
-			<h2>Interested ? Contact now! </h2>
-			<base-button link :to="contactLink">Contact </base-button>
-			<router-view></router-view> 
-			<!-- <router-link :to="contactLink">Contact Coach</router-link>
+	<div>
+		<section>
+			<base-card>
+				<h2> {{ fullname }}</h2>
+				<h3>${{ rate }}/hr</h3>
+			</base-card>
+		</section>
+		<section>
+			<base-card>
+				<h3>{{ description }}</h3>
+			</base-card>
+		</section>
+		<section>
+			<base-card>
+				<h2>Areas of expertise</h2>
+				<div>
+					<base-badge v-for="area in areas" :key="area" :type="area" :title="area" :class="area">
+					</base-badge>
+				</div>
+			</base-card>
+		</section>
+		<section>
+			<base-card>
+				<h2>Interested ? Contact now! </h2>
+				<base-button link :to="contactLink">Contact </base-button>
+				<router-view></router-view>
+				<!-- <router-link :to="contactLink">Contact Coach</router-link>
 			<router-view></router-view> -->
-		</base-card>
-	</section>
+			</base-card>
+		</section>
+	</div>
 </template>
 
 <script>

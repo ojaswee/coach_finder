@@ -1,6 +1,9 @@
 <template>
 	<the-header></the-header>
-	<router-view>
+	<router-view v-slot="slotProps" mode="out-in">
+		<transition name="route">
+			<component :is="slotProps.Component"></component>
+		</transition>
 	</router-view>
 </template>
 
@@ -15,7 +18,6 @@ export default {
 
 </script>
 
-
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
@@ -29,5 +31,16 @@ html {
 
 body {
 	margin: 0;
+}
+
+.route-enter-active,
+.route-leave-active {
+  transition: all 0.3s ease;
+}
+
+.route-enter,
+.route-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>

@@ -1,14 +1,16 @@
 <template>
-  <base-dialog :show="!!error" title="Error" @close="error = null">
-    <p>{{ error }}</p>
-  </base-dialog>
-  <section>
-    <base-card>
-      <h2>Register as a coach</h2>
-      <div v-if="isLoading"><base-spinner></base-spinner></div>
-      <div v-else><coach-form @save-data="saveCoachData"></coach-form></div>
-    </base-card>
-  </section>
+  <div>
+    <base-dialog :show="!!error" title="Error" @close="error = null">
+      <p>{{ error }}</p>
+    </base-dialog>
+    <section>
+      <base-card>
+        <h2>Register as a coach</h2>
+        <div v-if="isLoading"><base-spinner></base-spinner></div>
+        <div v-else><coach-form @save-data="saveCoachData"></coach-form></div>
+      </base-card>
+    </section>
+  </div>
 </template>
 <script>
 import CoachForm from '../../components/coaches/CoachForm.vue';
@@ -24,7 +26,7 @@ export default {
     };
   },
   methods: {
-   async saveCoachData(data) {
+    async saveCoachData(data) {
       this.isLoading = true;
       try {
         await this.$store.dispatch('coaches/registerCoach', data);

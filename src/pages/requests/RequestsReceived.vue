@@ -1,24 +1,26 @@
 <template>
-	<base-dialog :show="!!error" title="Error" @close="error = null">
-		<p>{{ error }}</p>
-	</base-dialog>
-	<section>
-		<base-card>
-			<header>
-				<h2>
-					Requests Received
-				</h2>
-			</header>
-			<div v-if="isLoading"><base-spinner></base-spinner></div>
-			<ul v-else-if="!isLoading && hasRequests">
-				<request-item v-for="request in requestsReceived" :key="request.id" :email="request.userEmail"
-					:message="request.message"></request-item>
-			</ul>
-			<div v-else-if="!isLoading && !hasRequests">
-				<h3>No new request received.</h3>
-			</div>
-		</base-card>
-	</section>
+	<div>
+		<base-dialog :show="!!error" title="Error" @close="error = null">
+			<p>{{ error }}</p>
+		</base-dialog>
+		<section>
+			<base-card>
+				<header>
+					<h2>
+						Requests Received
+					</h2>
+				</header>
+				<div v-if="isLoading"><base-spinner></base-spinner></div>
+				<ul v-else-if="!isLoading && hasRequests">
+					<request-item v-for="request in requestsReceived" :key="request.id" :email="request.userEmail"
+						:message="request.message"></request-item>
+				</ul>
+				<div v-else-if="!isLoading && !hasRequests">
+					<h3>No new request received.</h3>
+				</div>
+			</base-card>
+		</section>
+	</div>
 </template>
 <script>
 import RequestItem from '../../components/requests/RequestItem.vue';
