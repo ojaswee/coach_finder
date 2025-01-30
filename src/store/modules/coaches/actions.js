@@ -12,8 +12,10 @@ export default {
             areas: data.areas
         };
 
+        const token = context.rootGetters.token;
+
         try {
-            const response = await axios.put('https://vue-http-demo-4ba90-default-rtdb.firebaseio.com/coaches/' + userId + '.json'
+            const response = await axios.put(`https://vue-http-demo-4ba90-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=` +token
                 , coachData);
 
             if (response.status !== 200) {

@@ -1,30 +1,40 @@
 <template>
-	<form @submit.prevent="onSubmit">
+	<div>
+		<base-dialog :show="!!error" title="Error" @close="handleError">
+			<p>{{ error }}</p>
+		</base-dialog>
+		<base-dialog :show="isLoading" title="Authenticating..." fixed>
+			<base-spinner></base-spinner>
+		</base-dialog>
 		<base-card>
-			<div class="form-control">
-				<label for="email">Your E-Mail</label>
-				<input type="email" id="email" v-model="email" required>
-			</div>
-			<div class="form-control">
-				<label for="password">Password</label>
-				<input type="password" id="password" v-model="password" required>
-			</div>
-			<p v-if="!formIsValid"> Please enter a valid email and password</p>
-			<base-button type="submit">{{ isLoginMode ? 'Login' : 'Signup'}}</base-button>
-			<base-button type="button" @click="isLoginMode = !isLoginMode">Switch to {{ isLoginMode ?  'Signup' : 'Login'
-				}}</base-button>
+			<form @submit.prevent="onSubmit">
+				<div class="form-control">
+					<label for="email">Your E-Mail</label>
+					<input type="email" id="email" v-model="email" required>
+				</div>
+				<div class="form-control">
+					<label for="password">Password</label>
+					<input type="password" id="password" v-model="password" required>
+				</div>
+				<p v-if="!formIsValid"> Please enter a valid email and password</p>
+				<base-button type="submit">{{ isLoginMode ? 'Login' : 'Signup' }}</base-button>
+				<base-button type="button" @click="isLoginMode = !isLoginMode">Switch to {{ isLoginMode ? 'Signup' :
+					'Login'
+					}}</base-button>
+			</form>
 		</base-card>
-	</form>
+	</div>
 </template>
 <script>
-
 export default {
 	data() {
 		return {
 			isLoginMode: true,
 			email: '',
 			password: '',
-			formIsValid: true
+			formIsValid: true,
+			isLoading: false,
+			error: null
 		};
 	},
 	methods: {
@@ -42,12 +52,36 @@ export default {
 			}
 			return true;
 		},
-		onSubmit() {
+		async onSubmit() {
 			this.formIsValid = true;
+
 			if (!this.isEmailValid(this.email) || !this.isPasswordValid(this.password)) {
 				this.formIsValid = false;
 				return;
 			}
+			this.isLoading = true;
+			try {
+				if (this.isLoginMode) {
+					await this.$store.dispatch('login', {
+						email: this.email,
+						password: this.password
+					});
+					console.log('Logged in!');
+				} else {
+					await this.$store.dispatch('signup', {
+						email: this.email,
+						password: this.password
+					});
+				}
+			//	this.isLoading = false;
+			} catch (err) {
+				if (err.message === 'EMAIL_EXISTS') {
+					this.error = 'Email already exists';
+				} else {
+					this.error = err.message || 'Failed to authenticate. Please try again';
+				}
+			}
+			this.isLoading = false;
 		},
 		switchAuthMode() {
 			if (this.isLoginMode) {
@@ -55,7 +89,10 @@ export default {
 			} else {
 				this.isLoginMode = true;
 			}
-		}
+		},
+		handleError() {
+			this.error = null;
+		}	
 	}
 };
 </script>
