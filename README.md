@@ -1,4 +1,4 @@
-This application will find coaches, and the user can contact the coach. This application is built using Vuex and Firebase as the backend.
+This application will find coaches, and the user can contact the coach. This application is built using Vue.js and Firebase as the backend.
 
 
 Business Requirement
@@ -16,7 +16,7 @@ coaches
      -lastname
      -email
      -description
-     -rate
+     -hourlyRate
      -area of expertise
 
 
@@ -24,7 +24,7 @@ requests
     - id
     - coachID FK
     - message
-    - email
+    - userEmail
 
 
 To run this application
