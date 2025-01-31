@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = 'AIzaSyBlTm7a7-vIsFvtIyvcnLkKgH2sXkbgOF0'; 
+const API_KEY = 'AIzaSyBlTm7a7-vIsFvtIyvcnLkKgH2sXkbgOF0';
 
 export default {
   async login(context, payload) {
@@ -44,5 +44,12 @@ export default {
       console.error('Error signing up:', errorMessage);
       throw errorMessage;
     }
+  },
+  logout(context) {
+    context.commit('setUser', {
+      token: null,
+      userId: null,
+      tokenExpiration: null
+    });
   }
 };

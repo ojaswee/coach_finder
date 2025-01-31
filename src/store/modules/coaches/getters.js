@@ -10,18 +10,19 @@ export default {
 	},
 	getCoachAreas(state) {
 		const areas = new Set();
-        state.coaches.forEach(coach => {
-            coach.areas.forEach(area => areas.add(area));
-        });
-		if (areas.size === 0) {
+		state.coaches.forEach(coach => {
+			coach.areas.forEach(area => areas.add(area));
+		});
+		if (areas.size < 3) {
 			return ['Frontend', 'Backend', 'Devops'];
 		}
-        return Array.from(areas);
+		return Array.from(areas);
 	},
 
-	isCoach(_, getters, rootGetters) {
+	isCoach(state, getters, rootState) {
 		const coaches = getters.coaches;
-		const userId = rootGetters.userId;
+		const userId = rootState.auth.userId;
+		console.log('userId:', userId);
 		return coaches.some(coach => coach.id === userId);
 	},
 	shouldUpdate(state) {

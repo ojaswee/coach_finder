@@ -153,4 +153,7 @@ h3 {
 .invalid textarea {
 	border: 1px solid red;
 }
+label {
+  text-transform: none; /* Ensure no text transformation */
+}
 </style>

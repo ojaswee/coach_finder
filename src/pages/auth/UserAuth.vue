@@ -66,14 +66,14 @@ export default {
 						email: this.email,
 						password: this.password
 					});
-					console.log('Logged in!');
+					const redirectURL = '/'+ (this.$route.query.redirect || 'coaches');
+					this.$router.replace(redirectURL);
 				} else {
 					await this.$store.dispatch('signup', {
 						email: this.email,
 						password: this.password
 					});
 				}
-			//	this.isLoading = false;
 			} catch (err) {
 				if (err.message === 'EMAIL_EXISTS') {
 					this.error = 'Email already exists';
