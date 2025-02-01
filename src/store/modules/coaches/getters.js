@@ -13,7 +13,7 @@ export default {
 		state.coaches.forEach(coach => {
 			coach.areas.forEach(area => areas.add(area));
 		});
-		if (areas.size < 3) {
+		if (areas.size <= 0) {
 			return ['Frontend', 'Backend', 'Devops'];
 		}
 		return Array.from(areas);
@@ -22,7 +22,6 @@ export default {
 	isCoach(state, getters, rootState) {
 		const coaches = getters.coaches;
 		const userId = rootState.auth.userId;
-		console.log('userId:', userId);
 		return coaches.some(coach => coach.id === userId);
 	},
 	shouldUpdate(state) {
