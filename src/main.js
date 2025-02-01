@@ -8,6 +8,7 @@ import BaseButton from './components/ui/BaseButton.vue';
 import BaseBadge from './components/ui/BaseBadge.vue';
 import BaseSpinner from './components/ui/BaseSpinner.vue';
 import BaseDialog from './components/ui/BaseDialog.vue';
+import './assets/tailwind.css'; 
 
 const app = createApp(App);
 

@@ -1,15 +1,17 @@
 <template>
-  <header>
-    <nav>
-      <h1><router-link to="/">Coach Finder</router-link></h1>
-      <ul>
-        <li><router-link to="/coaches">Coaches</router-link></li>
-        <li v-if="isLoggedIn"><router-link to="/requests">Requests</router-link></li>
+  <header class="w-full h-20 bg-purple-900 flex items-center">
+    <nav class="flex items-center space-x-4 w-full">
+      <h1 class="text-white text-2xl mx-auto">
+        <router-link to="/" class="no-underline text-pink-300 hover:text-pink-400">Coach Finder</router-link>
+      </h1>
+      <ul class="flex space-x-4">
+        <li><router-link to="/coaches" class="text-pink-300 no-underline px-3 py-2 border border-transparent hover:border-pink-300">Coaches</router-link></li>
+        <li v-if="isLoggedIn"><router-link to="/requests" class="text-pink-300 no-underline px-3 py-2 border border-transparent hover:border-pink-300">Requests</router-link></li>
         <li v-else>
-          <router-link to="/auth">Login</router-link>
+          <router-link to="/auth" class="text-pink-300 no-underline px-3 py-2 border border-transparent hover:border-pink-300">Login</router-link>
         </li>
         <li v-if="isLoggedIn">
-          <base-button @click="logout">Logout</base-button>
+          <base-button @click="logout" class="text-pink-300 no-underline px-3 py-2 border border-transparent hover:border-pink-300">Logout</base-button>
         </li>
       </ul>
     </nav>
@@ -31,66 +33,3 @@ export default {
   },
 }
 </script>
-
-
-<style scoped>
-header {
-  width: 100%;
-  height: 5rem;
-  background-color: #3d008d;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-header a {
-  text-decoration: none;
-  color: #f391e3;
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  border: 1px solid transparent;
-}
-
-a:active,
-a:hover,
-a.router-link-active {
-  border: 1px solid #f391e3;
-}
-
-h1 {
-  margin: 0;
-}
-
-h1 a {
-  color: white;
-  margin: 0;
-}
-
-h1 a:hover,
-h1 a:active,
-h1 a.router-link-active {
-  border-color: transparent;
-}
-
-header nav {
-  width: 90%;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-li {
-  margin: 0 0.5rem;
-  border-color: transparent;
-}
-</style>
