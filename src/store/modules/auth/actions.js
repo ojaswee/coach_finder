@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let timer;
-let API_KEY = 'AIzaSyBlTm7a7-vIsFvtIyvcnLkKgH2sXkbgOF0';
+let API_KEY = process.env.VUE_APP_FIREBASE_API_KEY;
 
 export default {
   async login(context, payload) {
