@@ -46,10 +46,6 @@ export default {
 </script>
 
 <style scoped>
-h2 {
-    margin: 0.5rem 0;
-}
-
 .filter-option {
     margin-right: 1rem;
 }

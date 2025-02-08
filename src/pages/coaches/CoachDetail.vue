@@ -8,7 +8,7 @@
 		</section>
 		<section>
 			<base-card>
-				<h3>{{ description }}</h3>
+				<p>{{ description }}</p>
 			</base-card>
 		</section>
 		<section>

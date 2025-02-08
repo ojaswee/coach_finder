@@ -1,6 +1,6 @@
 <template>
 	<li class="my-4 border border-gray-700 rounded-lg p-4">
-		<h3 class="text-xl font-bold mb-2">{{ fullName }}</h3>
+		<h3>{{ fullName }}</h3>
 		<h4 class="text-lg mb-2">${{ rate }}/hr</h4>
 		<div>
 			<base-badge v-for="area in areas"
